@@ -1,0 +1,10 @@
+#!/usr/bin/env php
+<?php
+
+use Slonyaka\OpencartCli\Core\Kernel;
+
+require_once 'vendor/autoload.php';
+
+$kernel = new Kernel();
+
+$kernel->handle();

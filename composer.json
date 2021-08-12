@@ -1,0 +1,16 @@
+{
+    "name": "slonyaka/opencart-cli",
+    "description": "cli helper for opencart projects",
+    "autoload": {
+        "psr-4": {
+            "Slonyaka\\OpencartCli\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "s.slonchakov",
+            "email": "slonchakov@gmail.com"
+        }
+    ],
+    "require": {}
+}
