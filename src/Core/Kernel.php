@@ -15,7 +15,7 @@ class Kernel
      */
     private $request;
 
-    public function __construct(Request $request)
+    public function __construct(ConsoleRequest $request)
     {
         $this->request = $request;
     }

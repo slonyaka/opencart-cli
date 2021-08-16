@@ -4,9 +4,9 @@
 namespace Slonyaka\OpencartCli\Command;
 
 
-use Slonyaka\OpencartCli\Core\Request;
+use Slonyaka\OpencartCli\Core\ConsoleRequest;
 
 interface Command
 {
-    public function run(Request $request);
+    public function run(ConsoleRequest $request);
 }
