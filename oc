@@ -2,9 +2,11 @@
 <?php
 
 use Slonyaka\OpencartCli\Core\Kernel;
+use Slonyaka\OpencartCli\Core\Request;
 
 require_once 'vendor/autoload.php';
 
-$kernel = new Kernel();
+$request = new Request($argv);
+$kernel = new Kernel($request);
 
 $kernel->handle();

@@ -10,13 +10,20 @@ namespace Slonyaka\OpencartCli\Core;
 class Kernel
 {
 
-    public function __construct()
-    {
+    /**
+     * @var Request
+     */
+    private $request;
 
+    public function __construct(Request $request)
+    {
+        $this->request = $request;
     }
 
     public function handle()
     {
-        echo 'hello';
+        $commandFactory = new CommandFactory();
+        $command = $commandFactory($this->request->getCommand());
+        $command->run($this->request);
     }
 }
