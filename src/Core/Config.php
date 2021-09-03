@@ -37,13 +37,11 @@ class Config
 
     public function get($key)
     {
-
-        if (strpos($key, '.') !== false) {
-            $items = explode('.', $key);
-        } else {
+        if (strpos($key, '.') === false) {
             return $this->config[$key] ?? false;
         }
 
+        $items = explode('.', $key);
         $result = $this->config;
 
         foreach ($items as $index) {

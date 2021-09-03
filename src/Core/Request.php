@@ -26,9 +26,16 @@ class Request implements ConsoleRequest
             $this->arguments = array_slice($arguments, 2);
 
             foreach ($this->arguments as $argument) {
-                [$name, $value] = explode('=', $argument);
+
+                if (strpos($argument, '=') !== false) {
+                    [$name, $value] = explode('=', $argument);
+                } else {
+                    $name = $argument;
+                    $value = true;
+                }
+
                 if (strpos($name, '--') !== false) {
-                    $this->options[$name] = $value;
+                    $this->options[ltrim($name,'-')] = $value;
                 } else {
                     $this->arguments[$name] = $value;
                 }

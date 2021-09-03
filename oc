@@ -6,6 +6,8 @@ use Slonyaka\OpencartCli\Core\Request;
 
 require_once 'vendor/autoload.php';
 
+const OC_CLI_ROOT = __DIR__;
+
 $request = new Request($argv);
 $kernel = new Kernel($request);
 
