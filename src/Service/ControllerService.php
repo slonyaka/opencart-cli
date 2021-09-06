@@ -10,21 +10,24 @@ namespace Slonyaka\OpencartCli\Service;
 
 
 use Slonyaka\OpencartCli\Core\EntityType;
+use Slonyaka\OpencartCli\Output\PhpOutput;
 
 class ControllerService implements Service
 {
     public function process($name, ?string $type, ?bool $lang, ?bool $tpl, ?string $dir)
     {
-        $outputPart = $type .'.output.php';
+        $name = strtolower($name);
+        $templatesDirectory = config('config.templatesDirectory');
 
-        $data['output'] = file_get_contents(__DIR__ . '/../templates/parts/' . $outputPart);
+        $data['output'] = file_get_contents(sprintf('%sparts/%s.output.php', $templatesDirectory, $type));
 
-        $output = '<?php' . "\n\n";
-        $output .= file_get_contents(__DIR__ . '/../templates/controller.php');
+        /**
+         * @var PhpOutput $output
+         */
+        $output = app(PhpOutput::class);
+        $output->appendFromFile($templatesDirectory . 'controller.php');
 
-        $data['className'] = $name;
-
-        $loadTo = OC_CLI_ROOT . '/' . config('config.projectsDirectory') . '/catalog/controller/';
+        $loadTo = OC_CLI_ROOT . config('config.projectsDirectory') . '/catalog/controller/';
         $className = 'Controller';
 
         if ($type == EntityType::TYPE_EXTENSION) {
@@ -32,45 +35,36 @@ class ControllerService implements Service
             $className .= 'ExtensionModule';
             if ($dir) {
                 $className .= ucfirst($dir);
-                $dir = 'extension/module/' . $dir;
+                $dir = 'extension/module/' . $dir . '/';
             } else {
-                $dir = 'extension/module';
+                $dir = 'extension/module/';
             }
-
-            $loadTo .= $dir . '/';
         } else {
-            $dir = $dir ?? 'product';
-            $loadTo .= $dir . '/';
+            $dir = ($dir ?? 'product') . '/';
             $className .= ucfirst($dir);
         }
 
+        $loadTo .= $dir;
         $className .= ucfirst($name);
         $data['class'] = $className;
 
         if ($lang) {
-            $data['lang'] = '$this->load->language("' . $dir . '/' . $name . '");';
+            $data['lang'] = '$this->load->language("' . $dir . $name . '");';
         } else {
             $data['lang'] = '';
         }
 
         if ($tpl) {
-            $data['view'] = $dir . '/' . $name;
+            $data['view'] = $dir . $name;
         } else {
             $data['view'] = '';
         }
-
-        $controllerPath = $loadTo . strtolower($name) . '.php';
 
         if (!is_dir($loadTo)) {
             mkdir($loadTo, 0755, true);
         }
 
-        $replace = [];
-
-        foreach (array_keys($data) as $key) {
-            $replace[] = '['. $key .']';
-        }
-
-        file_put_contents($controllerPath, str_replace($replace, array_values($data), $output));
+        $controllerPath = $loadTo . $name . '.php';
+        $output->fill($data)->put($controllerPath);
     }
 }
