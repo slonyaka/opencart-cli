@@ -8,5 +8,5 @@ use Slonyaka\OpencartCli\Core\ConsoleRequest;
 
 interface Command
 {
-    public function run(ConsoleRequest $request);
+    public function run();
 }

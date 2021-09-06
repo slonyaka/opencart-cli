@@ -21,8 +21,9 @@ class CommandFactory
         $this->commands = config('commands');
     }
 
-    public function __invoke(string $command): Command
+    public function __invoke(): Command
     {
+        $command = request()->getCommand();
         if ($this->commandExists($command)) {
             return new $this->commands[$command];
         }

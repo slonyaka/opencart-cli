@@ -9,16 +9,16 @@
 namespace Slonyaka\OpencartCli\Command;
 
 
-use Slonyaka\OpencartCli\Core\ConsoleRequest;
 use Slonyaka\OpencartCli\Core\EntityType;
 use Slonyaka\OpencartCli\Service\ControllerService;
 
 class ControllerCommand implements Command
 {
 
-    public function run(ConsoleRequest $request)
+    public function run()
     {
-        $service = new ControllerService();
+        $request = request();
+        $service = app(ControllerService::class);
 
         $name = $request->getArgument('name');
 
