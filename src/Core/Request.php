@@ -11,12 +11,9 @@ namespace Slonyaka\OpencartCli\Core;
 
 class Request implements ConsoleRequest
 {
-    /**
-     * @var array
-     */
-    private $arguments;
     private $command;
-    private $options;
+    private $arguments = [];
+    private $options = [];
 
     public function __construct(array $arguments)
     {
@@ -66,5 +63,10 @@ class Request implements ConsoleRequest
     public function getOption($name): ?string
     {
         return $this->options[$name] ?? null;
+    }
+
+    public function all(): array
+    {
+        return array_merge(['command' => $this->getCommand()], $this->getArguments(), $this->getOptions());
     }
 }

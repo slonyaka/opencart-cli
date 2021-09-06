@@ -11,13 +11,16 @@ namespace Slonyaka\OpencartCli\Service;
 
 use Slonyaka\OpencartCli\Core\EntityType;
 use Slonyaka\OpencartCli\Output\PhpOutput;
+use Slonyaka\OpencartCli\Service\Options\ServiceOptions;
 
 class ControllerService implements Service
 {
-    public function process($name, ?string $type, ?bool $lang, ?bool $tpl, ?string $dir)
+    public function process(ServiceOptions $options)
     {
-        $name = strtolower($name);
+        $name = strtolower($options->getOption('name'));
         $templatesDirectory = config('config.templatesDirectory');
+
+        $type = $options->getOption('type') ?? EntityType::TYPE_CONTROLLER;
 
         $data['output'] = file_get_contents(sprintf('%sparts/%s.output.php', $templatesDirectory, $type));
 
@@ -33,28 +36,29 @@ class ControllerService implements Service
         if ($type == EntityType::TYPE_EXTENSION) {
 
             $className .= 'ExtensionModule';
-            if ($dir) {
-                $className .= ucfirst($dir);
-                $dir = 'extension/module/' . $dir . '/';
+            if ($options->hasOption('dir')) {
+                $className .= ucfirst($options->getOption('dir'));
+                $dir = 'extension/module/' . $options->getOption('dir') . '/';
             } else {
                 $dir = 'extension/module/';
             }
         } else {
-            $dir = ($dir ?? 'product') . '/';
+            $dir = ($options->getOption('dir') ?? 'product');
             $className .= ucfirst($dir);
+            $dir .= '/';
         }
 
         $loadTo .= $dir;
         $className .= ucfirst($name);
         $data['class'] = $className;
 
-        if ($lang) {
+        if ($options->hasOption('lang')) {
             $data['lang'] = '$this->load->language("' . $dir . $name . '");';
         } else {
             $data['lang'] = '';
         }
 
-        if ($tpl) {
+        if ($options->hasOption('tpl')) {
             $data['view'] = $dir . $name;
         } else {
             $data['view'] = '';

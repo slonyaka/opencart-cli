@@ -9,10 +9,12 @@
 namespace Slonyaka\OpencartCli\Service;
 
 
+use Slonyaka\OpencartCli\Service\Options\ServiceOptions;
+
 class TemplateService implements Service
 {
 
-    public function process(string $name)
+    public function process(ServiceOptions $options)
     {
         $templateDir = 'catalog/view/' . (config('config.theme') ?: 'default' ) . '/';
         $templatePath = OC_CLI_ROOT . config('config.projectsDirectory') . '/' . $templateDir;
@@ -21,6 +23,6 @@ class TemplateService implements Service
             mkdir($templatePath, 0755, true);
         }
 
-        file_put_contents($templatePath . '/' . strtolower($name) . '.tpl', '');
+        file_put_contents($templatePath . '/' . strtolower($options->getOption('name')) . '.tpl', '');
     }
 }

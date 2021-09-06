@@ -9,6 +9,8 @@
 namespace Slonyaka\OpencartCli\Core;
 
 
+use Exception;
+
 class Container
 {
     private static $instance;
@@ -41,6 +43,11 @@ class Container
             return $this->pool[$classname];
         }
 
+        if(key_exists($classname, config('container'))) {
+            $factory = config('container')[$classname];
+            return (new $factory)();
+        }
+
         return new $classname();
     }
 
@@ -54,6 +61,6 @@ class Container
 
     public function __wakeup()
     {
-        throw new \Exception("Cannot unserialize singleton");
+        throw new Exception("Cannot unserialize singleton");
     }
 }
