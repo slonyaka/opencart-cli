@@ -24,11 +24,9 @@ if (!function_exists('app')) {
     }
 }
 
-
 if (!function_exists('request')) {
     function request(): ConsoleRequest
     {
-        $container = Container::getInstance();
-        return $container->get(ConsoleRequest::class);
+        return app(ConsoleRequest::class);
     }
 }
