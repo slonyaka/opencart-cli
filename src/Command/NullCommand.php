@@ -9,11 +9,10 @@
 namespace Slonyaka\OpencartCli\Command;
 
 
-use Slonyaka\OpencartCli\Core\ConsoleRequest;
-
 class NullCommand implements Command
 {
-    public function run(ConsoleRequest $request) {
+    public function run() {
+        $request = request();
         echo 'Command ' . $request->getCommand() . ' not found' . "\n";
 
         $commands = config('commands');
