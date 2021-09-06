@@ -16,8 +16,8 @@ class TemplateService implements Service
 
     public function process(ServiceOptions $options)
     {
-        $templateDir = 'catalog/view/' . (config('config.theme') ?: 'default' ) . '/';
-        $templatePath = OC_CLI_ROOT . config('config.projectsDirectory') . '/' . $templateDir;
+        $templateDir = 'catalog/view/' . config('config.theme') . '/';
+        $templatePath = config('config.dir.projects') . '/' . $templateDir;
 
         if (!is_dir($templatePath)) {
             mkdir($templatePath, 0755, true);

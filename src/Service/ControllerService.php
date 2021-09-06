@@ -18,7 +18,7 @@ class ControllerService implements Service
     public function process(ServiceOptions $options)
     {
         $name = strtolower($options->getOption('name'));
-        $templatesDirectory = config('config.templatesDirectory');
+        $templatesDirectory = config('config.dir.templates');
 
         $type = $options->getOption('type') ?? EntityType::TYPE_CONTROLLER;
 
@@ -30,7 +30,7 @@ class ControllerService implements Service
         $output = app(PhpOutput::class);
         $output->appendFromFile($templatesDirectory . 'controller.php');
 
-        $loadTo = OC_CLI_ROOT . config('config.projectsDirectory') . '/catalog/controller/';
+        $loadTo = config('config.dir.projects') . '/catalog/controller/';
         $className = 'Controller';
 
         if ($type == EntityType::TYPE_EXTENSION) {
