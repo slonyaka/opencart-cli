@@ -1,1 +1,1 @@
-return $this->load->view('[view]', $data);
+        return $this->load->view('[view]', $data);
