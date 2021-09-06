@@ -28,9 +28,16 @@ class ControllerService implements Service
         $className = 'Controller';
 
         if ($type == EntityType::TYPE_EXTENSION) {
-            $loadTo .= 'extension/module/';
+
             $className .= 'ExtensionModule';
-            $dir = 'extension/module/' . $dir;
+            if ($dir) {
+                $className .= ucfirst($dir);
+                $dir = 'extension/module/' . $dir;
+            } else {
+                $dir = 'extension/module';
+            }
+
+            $loadTo .= $dir . '/';
         } else {
             $dir = $dir ?? 'product';
             $loadTo .= $dir . '/';
