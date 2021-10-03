@@ -15,8 +15,15 @@ class Request implements ConsoleRequest
     private $arguments = [];
     private $options = [];
 
+    /**
+     * @throws \Exception
+     */
     public function __construct(array $arguments)
     {
+        if (empty($argument[1])) {
+            throw new \Exception('Name of command is required');
+        }
+
         $this->command = $arguments[1];
 
         if (count($arguments) > 2) {
