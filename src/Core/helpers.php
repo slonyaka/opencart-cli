@@ -4,6 +4,7 @@
 use Slonyaka\OpencartCli\Core\Config;
 use Slonyaka\OpencartCli\Core\ConsoleRequest;
 use Slonyaka\OpencartCli\Core\Container;
+use Slonyaka\OpencartCli\Exception\ContainerException;
 
 if (!function_exists('config')) {
     function config($key)
@@ -13,6 +14,10 @@ if (!function_exists('config')) {
 }
 
 if (!function_exists('app')) {
+    /**
+     * @throws ReflectionException
+     * @throws ContainerException
+     */
     function app($classname = null)
     {
         $container = Container::getInstance();

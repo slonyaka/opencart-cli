@@ -2,7 +2,7 @@
 
 /**
  * ServiceOptionsFactory
- * @author sergey.slonchakov/centum-d
+ * @author sergey.slonchakov
  */
 
 
@@ -15,6 +15,6 @@ class ServiceOptionsFactory
 {
     public function __invoke(): ServiceOptions
     {
-        return new ServiceOptions(request()->all());
+        return new $this->className(request()->all());
     }
 }

@@ -2,17 +2,26 @@
 
 /**
  * InvokableFactory
- * @author sergey.slonchakov/centum-d
+ * @author sergey.slonchakov
  */
 
 
 namespace Slonyaka\OpencartCli\Factories;
 
 
-class InvokableFactory
+class InvokableFactory implements InvokableFactoryInterface
 {
-    public function __invoke($classname)
+    protected ?string $className = null;
+
+    public function __construct(string $className)
     {
-        return new $classname();
+        $this->className = $className;
+    }
+
+    public function __invoke()
+    {
+        if ($this->className) {
+            return new $this->className();
+        }
     }
 }
