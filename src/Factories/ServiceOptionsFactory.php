@@ -11,7 +11,7 @@ namespace Slonyaka\OpencartCli\Factories;
 
 use Slonyaka\OpencartCli\Service\Options\ServiceOptions;
 
-class ServiceOptionsFactory
+class ServiceOptionsFactory extends InvokableFactory
 {
     public function __invoke(): ServiceOptions
     {

@@ -2,7 +2,7 @@
 
 /**
  * EntityType
- * @author sergey.slonchakov/centum-d
+ * @author sergey.slonchakov
  */
 
 

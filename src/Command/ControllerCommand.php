@@ -16,6 +16,9 @@ use Slonyaka\OpencartCli\Service\Options\ServiceOptions;
 class ControllerCommand implements Command
 {
 
+    /**
+     * @throws Exception
+     */
     public function run()
     {
         $service = app(ControllerService::class);

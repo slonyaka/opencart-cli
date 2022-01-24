@@ -12,8 +12,8 @@ namespace Slonyaka\OpencartCli\Core;
 class Request implements ConsoleRequest
 {
     private $command;
-    private $arguments = [];
-    private $options = [];
+    private array $arguments = [];
+    private array $options = [];
 
     /**
      * @throws \Exception
