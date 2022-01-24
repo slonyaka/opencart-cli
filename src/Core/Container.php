@@ -68,8 +68,7 @@ class Container
         }
 
         $rc = new \ReflectionClass($classname);
-
-        if ($rc->getMethod('__construct')->getNumberOfRequiredParameters()) {
+        if ($rc->hasMethod('__construct') && $rc->getMethod('__construct')->getNumberOfRequiredParameters()) {
             throw new ContainerException('Classes with parameters in __construct method should be instantiated with invokable factory');
         }
 
