@@ -11,6 +11,7 @@ namespace Slonyaka\OpencartCli\Core;
 
 use Slonyaka\OpencartCli\Command\Command;
 use Slonyaka\OpencartCli\Command\NullCommand;
+use Slonyaka\OpencartCli\Exception\ContainerException;
 
 class CommandFactory
 {
@@ -21,11 +22,14 @@ class CommandFactory
         $this->commands = config('commands');
     }
 
+    /**
+     * @throws ContainerException
+     */
     public function __invoke(): Command
     {
         $command = request()->getCommand();
         if ($this->commandExists($command)) {
-            return new $this->commands[$command];
+            return app($this->commands[$command]);
         }
 
         return new NullCommand();
