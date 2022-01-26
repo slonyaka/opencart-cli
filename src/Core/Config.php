@@ -11,9 +11,9 @@ namespace Slonyaka\OpencartCli\Core;
 
 class Config
 {
-    private static $instance = null;
+    private static ?Config $instance = null;
 
-    private $config;
+    private array $config;
 
     private function __construct(array $config)
     {

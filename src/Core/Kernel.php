@@ -7,11 +7,12 @@
 
 namespace Slonyaka\OpencartCli\Core;
 
+use Slonyaka\OpencartCli\Exception\ContainerException;
+
 class Kernel
 {
     /**
-     * @throws \ReflectionException
-     * @throws \Slonyaka\OpencartCli\Exception\ContainerException
+     * @throws ContainerException
      */
     public function handle()
     {

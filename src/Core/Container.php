@@ -18,7 +18,7 @@ class Container
 {
     private static ?Container $instance = null;
 
-    private $pool = [];
+    private array $pool = [];
 
     public static function getInstance(): self
     {
@@ -42,7 +42,6 @@ class Container
 
     /**
      * @throws ContainerException
-     * @throws \Slonyaka\OpencartCli\Exception\FactoryException
      */
     public function get($classname)
     {
@@ -69,14 +68,15 @@ class Container
 
         if (class_exists($classname)) {
             $rc = new \ReflectionClass($classname);
-            if ($rc->hasMethod('__construct') && $rc->getMethod('__construct')->getNumberOfRequiredParameters()) {
+            if (
+                $rc->hasMethod('__construct')
+                && $rc->getMethod('__construct')->getNumberOfRequiredParameters()
+            ) {
                 throw new ContainerException($classname . ' class with parameters in __construct method. It should be instantiated with invokable factory');
             }
 
             return new $classname();
         }
-
-
 
         throw new ContainerException($classname . ' not found');
     }

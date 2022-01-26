@@ -1,6 +1,10 @@
 #!/usr/bin/env php
 <?php
 
+/**
+ * Opencart version 3.*
+ */
+
 use Slonyaka\OpencartCli\Core\ConsoleRequest;
 use Slonyaka\OpencartCli\Core\Kernel;
 use Slonyaka\OpencartCli\Core\Request;
@@ -12,9 +16,6 @@ const OC_CLI_ROOT = __DIR__ . '/';
 try {
     $app = app();
     $app->add(ConsoleRequest::class, new Request($argv));
-    /**
-     * @var Kernel $kernel
-     */
     $kernel = $app->get(Kernel::class);
     $kernel->handle();
 } catch (Exception $e) {

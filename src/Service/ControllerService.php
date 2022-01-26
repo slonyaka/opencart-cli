@@ -10,30 +10,29 @@ namespace Slonyaka\OpencartCli\Service;
 
 
 use Slonyaka\OpencartCli\Core\EntityType;
+use Slonyaka\OpencartCli\Exception\ContainerException;
 use Slonyaka\OpencartCli\Output\PhpOutput;
 use Slonyaka\OpencartCli\Service\Options\ServiceOptions;
 
 class ControllerService implements Service
 {
     /**
-     * @throws \ReflectionException
-     * @throws \Slonyaka\OpencartCli\Exception\ContainerException
-     * @throws \Slonyaka\OpencartCli\Exception\FactoryException
+     * @throws ContainerException
      */
     public function process(ServiceOptions $options)
     {
         $name = strtolower($options->getOption('name'));
-        $templatesDirectory = config('config.dir.templates');
+        $templatesDirectory = rtrim(config('config.dir.templates'), '/');
 
         $type = $options->getOption('type') ?? EntityType::TYPE_CONTROLLER;
 
-        $data['output'] = file_get_contents(sprintf('%sparts/%s.output.php', $templatesDirectory, $type));
+        $data['output'] = file_get_contents(sprintf('%s/parts/%s.output.php', $templatesDirectory, $type));
 
         /**
          * @var PhpOutput $output
          */
         $output = app(PhpOutput::class);
-        $output->appendFromFile($templatesDirectory . 'controller.php');
+        $output->appendFromFile($templatesDirectory . '/controller.php');
 
         $loadTo = config('config.dir.projects') . '/catalog/controller/';
         $className = 'Controller';

@@ -15,9 +15,7 @@ if (!function_exists('config')) {
 
 if (!function_exists('app')) {
     /**
-     * @throws ReflectionException
      * @throws ContainerException
-     * @throws \Slonyaka\OpencartCli\Exception\FactoryException
      */
     function app($classname = null)
     {
@@ -31,6 +29,9 @@ if (!function_exists('app')) {
 }
 
 if (!function_exists('request')) {
+    /**
+     * @throws ContainerException
+     */
     function request(): ConsoleRequest
     {
         return app(ConsoleRequest::class);

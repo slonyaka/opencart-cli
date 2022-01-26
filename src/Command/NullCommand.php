@@ -9,8 +9,13 @@
 namespace Slonyaka\OpencartCli\Command;
 
 
+use Slonyaka\OpencartCli\Exception\ContainerException;
+
 class NullCommand implements Command
 {
+    /**
+     * @throws ContainerException
+     */
     public function run() {
         $request = request();
         echo 'Command ' . $request->getCommand() . ' not found' . "\n";

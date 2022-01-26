@@ -1,6 +1,7 @@
 <?php
 
-use Slonyaka\OpencartCli\Factory\InvokableFactory;
+use Slonyaka\OpencartCli\Command\ControllerCommand;
+use Slonyaka\OpencartCli\Factory\Command\ControllerCommandFactory;
 use Slonyaka\OpencartCli\Factory\ServiceOptionsFactory;
 use Slonyaka\OpencartCli\Service\Options\ServiceOptions;
 
@@ -15,4 +16,5 @@ use Slonyaka\OpencartCli\Service\Options\ServiceOptions;
  */
 return [
     ServiceOptions::class => ServiceOptionsFactory::class,
+    ControllerCommand::class => ControllerCommandFactory::class
 ];

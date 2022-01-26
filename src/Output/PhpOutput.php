@@ -12,8 +12,8 @@ namespace Slonyaka\OpencartCli\Output;
 class PhpOutput
 {
 
-    private $output;
-    private $placeholders = [];
+    private string $output = '';
+    private array $placeholders = [];
 
     public function __construct()
     {

@@ -12,7 +12,7 @@ namespace Slonyaka\OpencartCli\Service\Options;
 class ServiceOptions
 {
 
-    private $options;
+    private array $options;
 
     public function __construct(array $options)
     {
