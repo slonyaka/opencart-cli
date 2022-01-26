@@ -31,7 +31,7 @@ class ControllerCommand extends AbstractCommand
      * @throws CommandException
      * @throws ContainerException
      */
-    public function doRun(ServiceOptions $options)
+    public function doRun(ServiceOptions $options): ?string
     {
         if (!$options->hasOption('name')) {
             throw new CommandException('name is required');
@@ -39,7 +39,7 @@ class ControllerCommand extends AbstractCommand
 
         $this->service->process($options);
 
-        echo 'controller has been generated';
+        return 'controller has been generated';
 
         /**
          * TODO Add eventDispatcher->dispatch

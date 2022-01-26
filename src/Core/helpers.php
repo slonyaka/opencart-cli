@@ -4,6 +4,7 @@
 use Slonyaka\OpencartCli\Core\Config;
 use Slonyaka\OpencartCli\Core\ConsoleRequest;
 use Slonyaka\OpencartCli\Core\Container;
+use Slonyaka\OpencartCli\Core\Output;
 use Slonyaka\OpencartCli\Exception\ContainerException;
 
 if (!function_exists('config')) {
@@ -35,5 +36,19 @@ if (!function_exists('request')) {
     function request(): ConsoleRequest
     {
         return app(ConsoleRequest::class);
+    }
+}
+
+if (!function_exists('output')) {
+    /**
+     * @throws ContainerException
+     */
+    function output($string = null): Output
+    {
+        $output = app(Output::class);
+        if ($string) {
+            $output->set($string);
+        }
+        return $output;
     }
 }

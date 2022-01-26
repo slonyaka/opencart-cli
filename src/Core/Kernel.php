@@ -14,10 +14,12 @@ class Kernel
     /**
      * @throws ContainerException
      */
-    public function handle()
+    public function handle(): Output
     {
+        /**
+         * @var CommandFactory $commandFactory
+         */
         $commandFactory = app(CommandFactory::class);
-        $command = $commandFactory();
-        $command->run();
+        return $commandFactory()->run();
     }
 }

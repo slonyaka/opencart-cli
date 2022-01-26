@@ -32,7 +32,7 @@ class CommandFactory
             return app($this->commands[$command]);
         }
 
-        return new NullCommand();
+        return app(NullCommand::class);
     }
 
     private function commandExists(string $command): bool

@@ -16,8 +16,12 @@ const OC_CLI_ROOT = __DIR__ . '/';
 try {
     $app = app();
     $app->add(ConsoleRequest::class, new Request($argv));
+    /**
+     * @var Kernel $kernel
+     */
     $kernel = $app->get(Kernel::class);
-    $kernel->handle();
+    $output = $kernel->handle();
+    $output->print();
 } catch (Exception $e) {
     echo basename(get_class($e)) . ': ' . $e->getMessage();
     exit;
