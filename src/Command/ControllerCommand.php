@@ -10,6 +10,7 @@ namespace Slonyaka\OpencartCli\Command;
 
 
 use Exception;
+use Slonyaka\OpencartCli\Exception\CommandException;
 use Slonyaka\OpencartCli\Service\ControllerService;
 use Slonyaka\OpencartCli\Service\Options\ServiceOptions;
 
@@ -25,7 +26,7 @@ class ControllerCommand implements Command
         $options = app(ServiceOptions::class);
 
         if (!$options->hasOption('name')) {
-            throw new Exception('name is required');
+            throw new CommandException('name is required');
         }
 
         $service->process($options);

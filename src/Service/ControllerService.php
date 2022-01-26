@@ -15,6 +15,11 @@ use Slonyaka\OpencartCli\Service\Options\ServiceOptions;
 
 class ControllerService implements Service
 {
+    /**
+     * @throws \ReflectionException
+     * @throws \Slonyaka\OpencartCli\Exception\ContainerException
+     * @throws \Slonyaka\OpencartCli\Exception\FactoryException
+     */
     public function process(ServiceOptions $options)
     {
         $name = strtolower($options->getOption('name'));

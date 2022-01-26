@@ -9,6 +9,8 @@
 namespace Slonyaka\OpencartCli\Core;
 
 
+use Slonyaka\OpencartCli\Exception\CommandException;
+
 class Request implements ConsoleRequest
 {
     private $command;
@@ -21,7 +23,7 @@ class Request implements ConsoleRequest
     public function __construct(array $arguments)
     {
         if (empty($arguments[1])) {
-            throw new \Exception('Name of command is required');
+            throw new CommandException('Name of command is required');
         }
 
         $this->command = $arguments[1];

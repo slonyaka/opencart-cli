@@ -18,7 +18,7 @@ try {
     $kernel = $app->get(Kernel::class);
     $kernel->handle();
 } catch (Exception $e) {
-    echo $e->getMessage();
+    echo basename(get_class($e)) . ': ' . $e->getMessage();
     exit;
 }
 

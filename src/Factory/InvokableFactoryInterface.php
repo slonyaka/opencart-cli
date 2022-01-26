@@ -1,6 +1,6 @@
 <?php
 
-namespace Slonyaka\OpencartCli\Factories;
+namespace Slonyaka\OpencartCli\Factory;
 
 interface InvokableFactoryInterface
 {

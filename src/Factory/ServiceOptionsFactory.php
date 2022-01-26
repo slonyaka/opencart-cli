@@ -6,7 +6,7 @@
  */
 
 
-namespace Slonyaka\OpencartCli\Factories;
+namespace Slonyaka\OpencartCli\Factory;
 
 
 use Slonyaka\OpencartCli\Service\Options\ServiceOptions;

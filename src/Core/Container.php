@@ -11,8 +11,8 @@ namespace Slonyaka\OpencartCli\Core;
 
 use Exception;
 use Slonyaka\OpencartCli\Exception\ContainerException;
-use Slonyaka\OpencartCli\Factories\InvokableFactory;
-use Slonyaka\OpencartCli\Factories\InvokableFactoryInterface;
+use Slonyaka\OpencartCli\Factory\InvokableFactory;
+use Slonyaka\OpencartCli\Factory\InvokableFactoryInterface;
 
 class Container
 {
@@ -42,7 +42,7 @@ class Container
 
     /**
      * @throws ContainerException
-     * @throws \ReflectionException
+     * @throws \Slonyaka\OpencartCli\Exception\FactoryException
      */
     public function get($classname)
     {
@@ -67,12 +67,18 @@ class Container
             return $factoryInstance();
         }
 
-        $rc = new \ReflectionClass($classname);
-        if ($rc->hasMethod('__construct') && $rc->getMethod('__construct')->getNumberOfRequiredParameters()) {
-            throw new ContainerException('Classes with parameters in __construct method should be instantiated with invokable factory');
+        if (class_exists($classname)) {
+            $rc = new \ReflectionClass($classname);
+            if ($rc->hasMethod('__construct') && $rc->getMethod('__construct')->getNumberOfRequiredParameters()) {
+                throw new ContainerException($classname . ' class with parameters in __construct method. It should be instantiated with invokable factory');
+            }
+
+            return new $classname();
         }
 
-        return new $classname();
+
+
+        throw new ContainerException($classname . ' not found');
     }
 
     private function __construct()

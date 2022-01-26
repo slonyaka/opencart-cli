@@ -17,6 +17,7 @@ if (!function_exists('app')) {
     /**
      * @throws ReflectionException
      * @throws ContainerException
+     * @throws \Slonyaka\OpencartCli\Exception\FactoryException
      */
     function app($classname = null)
     {

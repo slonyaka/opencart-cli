@@ -1,6 +1,7 @@
 <?php
 
-use Slonyaka\OpencartCli\Factories\ServiceOptionsFactory;
+use Slonyaka\OpencartCli\Factory\InvokableFactory;
+use Slonyaka\OpencartCli\Factory\ServiceOptionsFactory;
 use Slonyaka\OpencartCli\Service\Options\ServiceOptions;
 
 /**
@@ -9,12 +10,9 @@ use Slonyaka\OpencartCli\Service\Options\ServiceOptions;
  *
  * Implemented with invokable factories.
  * If class instance needs parameters, they should be provided in factory.
- *
- * class InvokableFactory {
- * public function __invoke(){}
- * }
+ * Slonyaka\OpencartCli\Factory\InvokableFactoryInterface
  *
  */
 return [
-    ServiceOptions::class => ServiceOptionsFactory::class
+    ServiceOptions::class => ServiceOptionsFactory::class,
 ];
