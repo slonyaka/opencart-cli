@@ -9,27 +9,35 @@
 namespace Slonyaka\OpencartCli\Command;
 
 
-use Exception;
 use Slonyaka\OpencartCli\Exception\CommandException;
+use Slonyaka\OpencartCli\Exception\ContainerException;
 use Slonyaka\OpencartCli\Service\ControllerService;
 use Slonyaka\OpencartCli\Service\Options\ServiceOptions;
 
-class ControllerCommand implements Command
+class ControllerCommand extends AbstractCommand
 {
+    protected string $signature = 'make:controller [name] --type={controller,extension} --dir={path/to/module} --lang{*hint: include language to controller} --tpl={template_name}';
+
+    protected string $description = '* Generates two types of controllers.';
+
+    private ControllerService $service;
+
+    public function __construct(ControllerService $service)
+    {
+        $this->service = $service;
+    }
 
     /**
-     * @throws Exception
+     * @throws CommandException
+     * @throws ContainerException
      */
-    public function run()
+    public function doRun(ServiceOptions $options)
     {
-        $service = app(ControllerService::class);
-        $options = app(ServiceOptions::class);
-
         if (!$options->hasOption('name')) {
             throw new CommandException('name is required');
         }
 
-        $service->process($options);
+        $this->service->process($options);
 
         echo 'controller has been generated';
 
